@@ -36,11 +36,11 @@ class realEstateBot:
                 time.sleep(4)
 
                 proper_prices = bot.find_elements_by_tag_name('span')
-                
+                proper_prices = [elem.get_attribute()]
 
-gta_cities = ['toronto', 'mississauga', 'hamilton', 'Kitchener', 'Waterloo', 'Barrie', 'Ajax'
-    , 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
-    'quinte', 'trois-rivieres', 'london', 'sherbrooke']
+gta_cities = ['toronto', 'mississauga', 'hamilton', 'kitchener', 'baterloo', 'barrie', 'ajax'
+, 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
+'quinte', 'trois-rivieres', 'london', 'sherbrooke']
 
 search_cities = random.choice(gta_cities)
 Point2Homes = realEstateBot(search_cities)
