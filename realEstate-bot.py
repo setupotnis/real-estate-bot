@@ -21,22 +21,31 @@ class realEstateBot:
 
     def search_nav(self):
         bot = self.bot
-        bot.get('https://www.realtor.ca/')
+        bot.get('https://www.point2homes.com/CA')
         time.sleep(10)
-        search = bot.find_element_by_id("homeSearchTxt")
+        search = bot.find_element_by_id("listing-location")
         search.clear()
         search.send_keys(self.search)
         time.sleep(5)
         search.send_keys(Keys.RETURN)
-        time.sleep(2)
+        time.sleep(6)
+        price_value = []
+        for i in range(1,7):
+            try:
+                bot.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(4)
 
+                proper_prices = bot.find_elements_by_tag_name('span')
+                
 
 gta_cities = ['toronto', 'mississauga', 'hamilton', 'Kitchener', 'Waterloo', 'Barrie', 'Ajax'
-, 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
-'quinte', 'trois-rivieres', 'london', 'sherbrooke']
+    , 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
+    'quinte', 'trois-rivieres', 'london', 'sherbrooke']
 
 search_cities = random.choice(gta_cities)
-realtor = realEstateBot(search_cities)
+Point2Homes = realEstateBot(search_cities)
 print(search_cities)
-realtor.search_nav()
+Point2Homes.search_nav()
+
+
 
