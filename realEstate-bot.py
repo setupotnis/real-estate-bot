@@ -21,16 +21,22 @@ class realEstateBot:
 
     def search_nav(self):
         bot = self.bot
-        bot.get('https://www.zillow.com/')
-        time.sleep(2)
-        search = bot.find_element_by_class_name("react-autosuggest__input")
+        bot.get('https://www.realtor.ca/')
+        time.sleep(10)
+        search = bot.find_element_by_id("homeSearchTxt")
         search.clear()
         search.send_keys(self.search)
+        time.sleep(5)
         search.send_keys(Keys.RETURN)
         time.sleep(2)
-        for_sale = bot.find_element_by_class_name("ListingButtons__Button-sc-8yz792-1")
-        for_sale.click()
 
 
-zillow = realEstateBot('mississauga')
-zillow.search_nav()
+gta_cities = ['toronto', 'mississauga', 'hamilton', 'Kitchener', 'Waterloo', 'Barrie', 'Ajax'
+, 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
+'quinte', 'trois-rivieres', 'london', 'sherbrooke']
+
+search_cities = random.choice(gta_cities)
+realtor = realEstateBot(search_cities)
+print(search_cities)
+realtor.search_nav()
+
