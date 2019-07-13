@@ -1,8 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from bs4 import BeautifulSoup
+import smtplib
+import requests
 import time
 import random
 import sys
+
+
 
 def print_same_line(text):
     sys.stdout.write('\r')
@@ -40,23 +45,19 @@ class realEstateBot:
             for location in locations:
                 bot.get(location)
                 time.sleep(5)
-                try:
-                    house_price = bot.find_element_by_css_selector('div.price')
-                    print(house_price)
-                    #converted_price = round(int(house_price))
-                    #if(converted_price >= 500000):
-                        #Aprint('high price')
-                    #else:
-                    #    print('low prices')
-                except Exception as e:
-                    time.sleep(5)
 
+                URL = location
+                headers = {'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.90 Safari/537.36"}
+                page = requests.get(URL, headers=headers)
 
-            
+                soup = BeautifulSoup(page.content, 'html.parser')
+
+                address = soup.find(id='ratehub').get_text()
+                print(address[50:-4]) 
 
 gta_cities = ['toronto', 'mississauga', 'hamilton', 'kitchener', 'waterloo', 'barrie', 'ajax'
 , 'cambridge', 'peterborough', 'gatineau', 'burlington', 'montreal', 'niagara', 'ottawa', 'guelph',
-'quinte', 'trois-rivieres', 'london', 'sherbrooke']
+'quinte', 'london']
 
 searchbar = random.choice(gta_cities)
 point2homes = realEstateBot(searchbar)
